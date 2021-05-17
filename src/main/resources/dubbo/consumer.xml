@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd        http://dubbo.apache.org/schema/dubbo        http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+	<!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+	<dubbo:application name="activity-consumer" />
+
+	<!-- 使用multicast广播注册中心暴露发现服务地址 -->
+	<dubbo:registry protocol="zookeeper"
+		address="zookeeper://127.0.0.1:2181" />
+
+	<!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
+	<dubbo:reference id="activityService" interface="com.deco.service.pc.ActivityService" version="1.2.0" check="false"/>
+	<dubbo:reference id="signupService" interface="com.deco.service.pc.SignupService" version="1.2.0" check="false"/>
+	<dubbo:reference id="signupFieldService" interface="com.deco.service.pc.SignupFieldService" version="1.2.0" check="false"/>
+	<dubbo:reference id="activityAttachmentService" interface="com.deco.service.pc.ActivityAttachmentService" version="1.2.0" check="false"/>
+	<dubbo:reference id="activityIncreasekeyService" interface="com.deco.service.pc.ActivityIncreasekeyService" version="1.2.0" check="false"/>
+	<dubbo:reference id="signupTemplateService" interface="com.deco.service.pc.SignupTemplateService" version="1.2.0" check="false"/>
+	<dubbo:reference id="activityLinkPlaceService" interface="com.deco.service.pc.ActivityLinkPlaceService" version="1.2.0" check="false"/>
+	
+	<!-- 学堂模块 -->
+	<dubbo:reference id="schoolService" interface="com.deco.service.pc.SchoolService" version="1.2.0" check="false"/>
+	<!-- 场所模块 -->
+	<dubbo:reference id="placeService" interface="com.deco.service.pc.PlaceService" version="1.2.0" check="false"/>
+	<!-- 用户模块 -->
+	<dubbo:reference id="messageService" interface="com.deco.service.pc.MessageService" version="1.2.0" check="false"/>
+	<dubbo:reference id="userincreasekeyService" interface="com.deco.service.pc.UserIncreasekeyService" version="1.2.0" check="false"/>
+	<dubbo:reference id="userService" interface="com.deco.service.pc.UserService" version="1.2.0" check="false"/>
+	<dubbo:reference id="applyMchService" interface="com.deco.service.pc.ApplyMchService" version="1.2.0" check="false"/>
+	<!-- wechatapplet -->
+	<dubbo:reference id="wxActivityService" interface="com.deco.service.wechatapplet.WXActivityService" version="1.2.0" check="false"/>
+	<dubbo:reference id="wxSignupService" interface="com.deco.service.wechatapplet.WXSignupService" version="1.2.0" check="false"/>
+	<dubbo:reference id="wxUserService" interface="com.deco.service.wechatapplet.WXUserService" version="1.2.0" check="false"/>
+	<dubbo:reference id="wxMessageService" interface="com.deco.service.wechatapplet.WXMessageService" version="1.2.0" check="false"/>
+</beans>
